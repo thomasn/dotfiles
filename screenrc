@@ -1,0 +1,44 @@
+# From :
+# * http://www.youtube.com/watch?v=IFClpADY7Tc
+# * http://www.nerdlogger.com/2007/10/screenits-not-just-for-nerds-anymore.html
+# * http://blog.eater.org/2008/12/new-screenrc-hardstatus-string.html
+
+escape ^\\\   # as suggested by http://www.emacswiki.org/emacs/GnuScreen - use "C-\"
+multiuser on
+acladd thomasn,yuryk,stevet
+vbell off
+
+hardstatus alwayslastline
+
+# hardstatus string "%1`"
+
+#hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %m/%d %C%a "
+#hardstatus string "%{= mK}%-Lw%{= KW}%50>%n%f* %t%{= mK}%+Lw%< %{= kG}%-=%D %d %M %Y %c:%s%{-}"
+#hardstatus string "%{= kG}%-Lw%{= kW}%50> %n%f* %t%{= kG}%+Lw%< %{= kG}%-=%c:%s%{-}"
+#hardstatus string "%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]"
+
+# hardstatus string "%{gk}[ %{G}%H %{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b C}[ %m/%d %c ]%{W}"
+
+hardstatus string "%{= ky}%-Lw%{=r}%20>%n %t%{= ky}%+Lw %{= ky}%-=| %{= kw}%M%d %c%{-} %{=r} ${USER}@%H "
+# %{= ky}     set color to yellow on black.
+# %{= yk}     set color to black on yellow.
+# %{=r}       reverse the color attrs
+# %-Lw        all window #s, titles, and flags before the current window.
+# %n %t       current window number and title.
+# %+Lw        all windows #s, titles, and flags after the current window.
+# %-=         pad remaining spaces.
+# %M%d        month and day, like MmmDD.
+# %c          current time, like HH:MM.
+# %H          hostname
+
+#Default screens
+# screen -t terminal 0
+# screen -t emacs 1
+# screen -t vim 2
+
+defutf8 on
+# startup_message off
+# shelltitle "shell"
+# bell_msg ""
+defscrollback 10000
+
