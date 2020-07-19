@@ -1,7 +1,9 @@
 "vimrc
 "@author Thomas Nichols <thomas@nexus10.com>
 "@date 2020-03-27
-"
+
+set encoding=utf-8
+
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
@@ -48,4 +50,8 @@ if dein#check_install()
 endif
 
 "End dein Scripts-------------------------
+
+colorscheme industry
+
+
 "
