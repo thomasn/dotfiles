@@ -38,11 +38,15 @@ if dein#load_state('/home/thomasn/.cache/dein')
     call dein#add('nvim-lua/popup.nvim')
     call dein#add('nvim-lua/plenary.nvim')
     call dein#add('nvim-telescope/telescope.nvim')
+    call dein#add('autozimu/LanguageClient-neovim', {
+    \ 'rev': 'next',
+    \ 'build': 'bash install.sh',
+    \ })
   endif
-
   let g:deoplete#enable_at_startup = 1
 
 "  call dein#add('preservim/nerdtree')
+  call dein#add('JuliaEditorSupport/julia-vim')
   
   " Required by dein:
   call dein#end()
