@@ -11,15 +11,15 @@ endif
 
 
 " Required by dein:
-set runtimepath+=/home/thomasn/.cache/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/home/thomasn/.cache/dein')
-  call dein#begin('/home/thomasn/.cache/dein')
+if dein#load_state('~/.cache/dein')
+  call dein#begin('~/.cache/dein')
 
   " Let dein manage dein
   " Required:
-  call dein#add('/home/thomasn/.cache/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
 
 
@@ -33,15 +33,31 @@ if dein#load_state('/home/thomasn/.cache/dein')
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
+ endif
   if has('nvim')
     call dein#add('nvim-lua/popup.nvim')
     call dein#add('nvim-lua/plenary.nvim')
     call dein#add('nvim-telescope/telescope.nvim')
-    call dein#add('autozimu/LanguageClient-neovim', {
-    \ 'rev': 'next',
-    \ 'build': 'bash install.sh',
-    \ })
+    call dein#add('sudormrfbin/cheatsheet.nvim')
+     call dein#add('neovim/nvim-lspconfig')
+"    call dein#add('kabouzeid/nvim-lspinstall')    -- not responding
+" the below is a Lua code block
+lua << EOF
+    local nvim_lsp = require'nvim_lsp'
+    nvim_lsp.julials.setup()
+EOF
+"         " alternatively one can call `nvim_lsp.julials.setup()` above if not
+"         using diagnostic-nvim
+"     nvim_lsp.julials.setup({on_attach=require'diagnostic'.on_attach})
+
+"
+"         " enable completion (requires separate plugin such as deoplete-lsp)
+"         autocmd Filetype julia setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+" call dein#add('autozimu/LanguageClient-neovim', {
+" \ 'rev': 'next',
+" \ 'build': 'bash install.sh',
+" \ })
   endif
   let g:deoplete#enable_at_startup = 1
 
