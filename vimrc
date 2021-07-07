@@ -10,7 +10,7 @@ if &compatible
 endif
 
 
-" Required by dein:
+" Reuired by dein:
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
@@ -39,36 +39,44 @@ if dein#load_state('~/.cache/dein')
     call dein#add('nvim-lua/plenary.nvim')
     call dein#add('nvim-telescope/telescope.nvim')
     call dein#add('sudormrfbin/cheatsheet.nvim')
-     call dein#add('neovim/nvim-lspconfig')
-"    call dein#add('kabouzeid/nvim-lspinstall')    -- not responding
-" the below is a Lua code block
+    call dein#add('neovim/nvim-lspconfig')
 lua << EOF
-    local nvim_lsp = require'nvim_lsp'
-    nvim_lsp.julials.setup()
+require 'lspconfig'.julials.setup{}
 EOF
-"         " alternatively one can call `nvim_lsp.julials.setup()` above if not
+    " call dein#add('deoplete-plugins/deoplete-lsp')
+    " enable completion for Julia
+    autocmd Filetype julia setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+
 "         using diagnostic-nvim
 "     nvim_lsp.julials.setup({on_attach=require'diagnostic'.on_attach})
 
 "
-"         " enable completion (requires separate plugin such as deoplete-lsp)
-"         autocmd Filetype julia setlocal omnifunc=v:lua.vim.lsp.omnifunc
-
 " call dein#add('autozimu/LanguageClient-neovim', {
 " \ 'rev': 'next',
 " \ 'build': 'bash install.sh',
 " \ })
-  endif
+
+  endif " has_nvim
+  
   let g:deoplete#enable_at_startup = 1
 
-"  call dein#add('preservim/nerdtree')
   call dein#add('JuliaEditorSupport/julia-vim')
-  
+  call dein#add('tpope/vim-fugitive')
+
   " Required by dein:
   call dein#end()
   call dein#save_state()
-endif 
-  " Required by dein:
+
+
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+
+
+endif " dein#load_state
+" Required by dein:
 filetype plugin indent on
 syntax enable
 
@@ -80,6 +88,12 @@ endif
 "End dein Scripts-------------------------
 
 colorscheme industry
-
-
+set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
+set number
+filetype plugin indent on
+set tabstop=4
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+" On pressing tab, insert 4 spaces
+set expandtab
 
