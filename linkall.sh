@@ -7,3 +7,4 @@ ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
 ln -s ~/dotfiles/screenrc ~/.screenrc
 ln -s ~/dotfiles/vimrc ~/.vim/vimrc
 ln -s ~/dotfiles/vimrc ~/.config/nvim/init.vim
+ln -s ~/dotfiles/bashrc ~/.bashrc
