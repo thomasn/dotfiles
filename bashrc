@@ -4,7 +4,6 @@
 # If not running interactively, do not proceed
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
 export EDITOR=vim
 alias e='vim'
 export PATH=$PATH:$HOME/bin
@@ -28,6 +27,7 @@ fi
 # -- ArchWSL --
 PS1='[\u@\h \W]\$ '
 export EDITOR=nvim
+alias ls='ls --color=auto'
 alias e='nvim'
 alias xe='nvim'
 alias nv='nvim'
