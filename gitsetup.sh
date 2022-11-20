@@ -1,4 +1,5 @@
 #!/bin/bash
+###### UNUSED - SEE dotfiles/gitconfig #####
 git config --global alias.ci commit
 git config --global alias.st status
 git config --global alias.ls ls-files
