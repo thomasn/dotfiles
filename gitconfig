@@ -1,0 +1,11 @@
+[alias]
+	ci = commit
+	st = status
+	ls = ls-files
+[user]
+	name = Thomas Nichols
+	email = thomas@nexus10.com
+[pull]
+	rebase = false
+[init]
+	defaultBranch = main
