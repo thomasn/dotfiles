@@ -41,11 +41,14 @@ if dein#load_state('~/.cache/dein')
     call dein#add('sudormrfbin/cheatsheet.nvim')
      call dein#add('neovim/nvim-lspconfig')
 "    call dein#add('kabouzeid/nvim-lspinstall')    -- not responding
+
 " the below is a Lua code block
 lua << EOF
-    local nvim_lsp = require'nvim_lsp'
-    nvim_lsp.julials.setup()
+ require 'lspconfig'.julials.setup{}
 EOF
+"  local nvim_lsp = require'lspconfig'
+"     nvim_lsp.julials.setup()
+
 "         " alternatively one can call `nvim_lsp.julials.setup()` above if not
 "         using diagnostic-nvim
 "     nvim_lsp.julials.setup({on_attach=require'diagnostic'.on_attach})

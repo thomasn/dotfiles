@@ -6,5 +6,5 @@ cnoremap <silent> <S-Insert> <C-R>+
 
 
 " :GuiFont! Iosevka SS04:h16
-:GuiFont Iosevka Term:h15
+:GuiFont Iosevka Term:h13
 
