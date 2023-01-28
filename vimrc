@@ -28,7 +28,7 @@ if dein#load_state('~/.cache/dein')
   "
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
-  " call dein#add('lervag/vimtex')
+  " call dein#add('lervag/vimtex')<F11>
   " call dein#add('Shougo/deoplete.nvim')
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
@@ -40,6 +40,17 @@ if dein#load_state('~/.cache/dein')
     call dein#add('nvim-telescope/telescope.nvim')
     call dein#add('sudormrfbin/cheatsheet.nvim')
 "      call dein#add('neovim/nvim-lspconfig')
+    "Basic vimwiki / Obsidian config
+    call dein#add('vimwiki/vimwiki')
+    let g:vimwiki_list = [{'path': '~/Documents/Obsidian/Pigsty/',
+                          \ 'syntax': 'markdown', 'ext': '.md'}]
+
+    " Open file in Obsidian vault
+    " TODO: fix Windows to open obsidian: 
+    " <F11>command IO execute "silent !start 'obsidian://open?vault=Pigsty&file=" . expand('%:r') . "'"
+    " nnoremap <leader>io :IO<CR>
+
+
 " "    call dein#add('kabouzeid/nvim-lspinstall')    -- not responding
 " 
 " " the below is a Lua code block
