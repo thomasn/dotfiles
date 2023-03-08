@@ -39,7 +39,6 @@ if dein#load_state('~/.cache/dein')
     call dein#add('nvim-lua/plenary.nvim')
     call dein#add('nvim-telescope/telescope.nvim')
     call dein#add('sudormrfbin/cheatsheet.nvim')
-"      call dein#add('neovim/nvim-lspconfig')
     "Basic vimwiki / Obsidian config
     call dein#add('vimwiki/vimwiki')
     let g:vimwiki_list = [{'path': '~/Documents/Obsidian/Pigsty/',
@@ -51,33 +50,46 @@ if dein#load_state('~/.cache/dein')
     " nnoremap <leader>io :IO<CR>
 
 
-" "    call dein#add('kabouzeid/nvim-lspinstall')    -- not responding
-" 
-" " the below is a Lua code block
-" lua << EOF
-"  require 'lspconfig'.julials.setup{}
-" EOF
-" "  local nvim_lsp = require'lspconfig'
-" "     nvim_lsp.julials.setup()
-" 
-" "         " alternatively one can call `nvim_lsp.julials.setup()` above if not
-" "         using diagnostic-nvim
-" "     nvim_lsp.julials.setup({on_attach=require'diagnostic'.on_attach})
-" =======
-    " call dein#add('nvim-lua/diagnostic-nvim')
     call dein#add('nvim-lua/completion-nvim')
-    call dein#add('neovim/nvim-lspconfig')
+    " call dein#add('neovim/nvim-lspconfig')
     call dein#add('kdheepak/JuliaFormatter.vim')
 
-    " call dein#add('deoplete-plugins/deoplete-lsp')
+    call dein#add("williamboman/mason.nvim")
 
-    autocmd BufEnter * lua require'completion'.on_attach()
+lua << EOF
+require("mason").setup()
+EOF
 
-"" lua << EOF
-""     local nvim_lspconfig = require'lspconfig'
-""     nvim_lspconfig.julials.setup{}
-"" EOF
+    call dein#add("williamboman/mason-lspconfig.nvim")
+    call dein#add("simrat39/rust-tools.nvim")
 
+lua << EOF
+    local rt = require("rust-tools")
+
+rt.setup({
+  server = {
+    on_attach = function(_, bufnr)
+      -- Hover actions
+      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
+  },
+})
+
+EOF
+
+    call dein#add("hrsh7th/cmp-buffer")
+    call dein#add("hrsh7th/cmp-nvim-lsp")
+    call dein#add("hrsh7th/cmp-nvim-lsp-signature-help")
+    call dein#add("hrsh7th/cmp-nvim-lua")
+    call dein#add("hrsh7th/cmp-path")
+    call dein#add("hrsh7th/cmp-vsnip")
+    call dein#add("hrsh7th/nvim-cmp")
+    call dein#add("hrsh7th/vim-vsnip")
+
+
+autocmd BufEnter * lua require'completion'.on_attach()
 
 lua << EOF
 require'lspconfig'.julials.setup{
