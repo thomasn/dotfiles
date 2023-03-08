@@ -31,6 +31,8 @@ alias ls='ls --color=auto'
 alias e='nvim'
 alias xe='nvim'
 alias nv='nvim'
+# alias bramvim=`which vim`
+# alias vim='nvim'
 # for ArchWSL, ensure sshd is started
 SSHDPROC=`ps -ef | grep sshd | grep listener`
 [ -z "$SSHDPROC" ] && echo sudo systemctl start sshd
