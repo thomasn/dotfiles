@@ -45,3 +45,6 @@ export RSX_ADDR=10xxx@ch-sxxx.rsync.net
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
+# Add cargo binaries to PATH:
+export PATH="$PATH:$HOME/.cargo/bin"
+
