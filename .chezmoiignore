@@ -1,0 +1,8 @@
+# GUI terminal config is only useful where there is a display.
+{{- if not (env "DISPLAY") }}
+{{- if not (env "WAYLAND_DISPLAY") }}
+.config/wezterm/
+{{- end }}
+{{- end }}
+
+README.md

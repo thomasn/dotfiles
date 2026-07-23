@@ -1,0 +1,15 @@
+#!/bin/bash
+# julia-repl-start - start a Julia REPL in the {right} tmux pane
+PROJECT_DIR="${1:-.}"
+
+if [[ -z ${TMUX:-} ]]; then
+    echo "ERROR: not in a tmux session (tmux new -s julia)" >&2
+    exit 1
+fi
+
+if [[ $(tmux list-panes | wc -l) -eq 1 ]]; then
+    tmux split-window -h -l 40%
+fi
+
+tmux send-keys -t '{right}' "cd $PROJECT_DIR && julia --project=." Enter
+echo "Julia REPL started in the right pane."

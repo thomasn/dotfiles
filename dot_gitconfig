@@ -1,0 +1,40 @@
+[user]
+	name = Thomas Nichols
+	email = thomas@nexus10.com
+
+[core]
+	editor = nvim
+	autocrlf = input
+	whitespace = trailing-space,space-before-tab
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = false
+
+[push]
+	default = simple
+	autoSetupRemote = true
+
+[merge]
+	tool = nvimdiff
+	conflictstyle = diff3
+
+[diff]
+	tool = nvimdiff
+	algorithm = histogram
+
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	ci = commit
+	ls = log --oneline --graph --decorate
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	amend = commit --amend --no-edit
+	undo = reset --soft HEAD~1
+
+[color]
+	ui = auto

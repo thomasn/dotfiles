@@ -1,0 +1,125 @@
+# ~/.bashrc - Bash configuration for faerieconfig
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# History settings
+HISTSIZE=10000
+HISTFILESIZE=20000
+HISTCONTROL=ignoreboth:erasedups
+shopt -s histappend
+shopt -s checkwinsize
+
+# Enable color support
+alias ls='eza --icons'
+alias ll='eza -alh --icons'
+alias la='eza -a --icons'
+alias lt='eza --tree --level=2 --icons'
+alias grep='grep --color=auto'
+alias cat='bat --theme=TwoDark'
+alias diff='diff --color=auto'
+
+# Development aliases
+alias vim='nvim'
+alias v='nvim'
+alias vi='nvim'
+alias g='git'
+alias d='docker'
+alias dc='docker-compose'
+alias lg='lazygit'
+
+# Julia aliases
+alias jl='julia'
+alias jlrepl='julia --project=.'
+alias jltest='julia --project=. -e "using Pkg; Pkg.test()"'
+
+# Directory navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# Git aliases
+alias gs='git status'
+alias ga='git add'
+alias gaa='git add --all'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gp='git push'
+alias gpl='git pull'
+alias gd='git diff'
+alias gco='git checkout'
+alias gb='git branch'
+alias glog='git log --oneline --graph --decorate'
+
+# Tmux aliases
+alias ta='tmux attach -t'
+alias tls='tmux ls'
+alias tn='tmux new -s'
+alias tk='tmux kill-session -t'
+
+# Quick edit configs
+alias vimrc='nvim ~/.config/nvim/init.lua'
+alias bashrc='nvim ~/.bashrc && source ~/.bashrc'
+alias tmuxrc='nvim ~/.config/tmux/tmux.conf'
+alias reload='source ~/.bashrc'
+
+# System info
+alias mem='free -h'
+alias disk='df -h'
+
+# Safety
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Path
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.juliaup/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+
+# rbenv (no-op if not installed)
+command -v rbenv >/dev/null 2>&1 && eval "$(rbenv init - bash)"
+
+# Editor
+export EDITOR=nvim
+export VISUAL=nvim
+export SUDO_EDITOR=nvim
+
+# Julia optimization
+export JULIA_NUM_THREADS=auto
+export JULIA_EDITOR=nvim
+
+# FZF configuration
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --inline-info'
+
+# Load FZF key bindings
+[ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
+[ -f /usr/share/fzf/completion.bash ] && source /usr/share/fzf/completion.bash
+
+# Ollama
+export OLLAMA_HOST=127.0.0.1:11434
+
+# Colored man pages
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
+
+# Functions
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# Lightweight git-aware prompt (starship deliberately rejected)
+__fc_git_branch() {
+    git branch --show-current 2>/dev/null | sed 's/.*/ (&)/'
+}
+PS1='\[\e[1;32m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[1;35m\]$(__fc_git_branch)\[\e[0m\]\$ '
