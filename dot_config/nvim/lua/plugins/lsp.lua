@@ -63,8 +63,22 @@ return {
         end,
       })
 
-      -- Julia
+      -- Julia: use Mason's julia-lsp (bundles LanguageServer.jl) rather than
+      -- lspconfig's default, which expects LanguageServer.jl to be added by
+      -- hand to ~/.julia/environments/nvim-lspconfig. The launcher's argument
+      -- is the Julia environment to analyse: the project root when there is a
+      -- Project.toml, otherwise the file's own directory.
+      -- The server runs on juliaup's `lts` channel: the SymbolServer bundled
+      -- in julia-lsp v1.219.2 fails to precompile on Julia 1.13 (Core._apply
+      -- was removed). Code is still analysed against the project's own env.
+      -- The ansible julia role installs `lts` on dev boxes.
       vim.lsp.config("julials", {
+        cmd = function(dispatchers, config)
+          local env = config.root_dir or vim.fn.expand("%:p:h")
+          return vim.lsp.rpc.start({ "julia-lsp", env }, dispatchers, {
+            env = { JULIAUP_CHANNEL = "lts" },
+          })
+        end,
         settings = {
           julia = {
             lint = { missingrefs = "all", iter = true, lazy = true, modname = true },
