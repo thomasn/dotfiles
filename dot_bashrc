@@ -72,12 +72,20 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
-# Path
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.juliaup/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH="$HOME/go/bin:$PATH"
+# Path. Prepend only if absent: nested shells (tmux, subshells) inherit PATH
+# and re-source this file, which used to stack a copy per level.
+__fc_path_prepend() {
+    case ":$PATH:" in
+        *":$1:"*) ;;
+        *) PATH="$1:$PATH" ;;
+    esac
+}
+__fc_path_prepend "$HOME/.local/bin"
+__fc_path_prepend "$HOME/.cargo/bin"
+__fc_path_prepend "$HOME/.juliaup/bin"
+__fc_path_prepend "$HOME/.rbenv/bin"
+__fc_path_prepend "$HOME/go/bin"
+export PATH
 
 # rbenv (no-op if not installed)
 command -v rbenv >/dev/null 2>&1 && eval "$(rbenv init - bash)"
@@ -123,7 +131,8 @@ __fc_git_branch() {
     git branch --show-current 2>/dev/null | sed 's/.*/ (&)/'
 }
 PS1='\[\e[1;32m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[1;35m\]$(__fc_git_branch)\[\e[0m\]\$ '
-export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+command -v ruby >/dev/null 2>&1 && __fc_path_prepend "$(ruby -e 'print Gem.user_dir')/bin"
+export PATH
 [ -f ~/.bashrc.local ] && . ~/.bashrc.local
 
 
