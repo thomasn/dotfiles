@@ -7,7 +7,7 @@ local augroup = vim.api.nvim_create_augroup
 autocmd("TextYankPost", {
   group = augroup("HighlightYank", { clear = true }),
   callback = function()
-    vim.highlight.on_yank({ timeout = 200 })
+    vim.hl.on_yank({ timeout = 200 })
   end,
 })
 
@@ -69,19 +69,9 @@ autocmd("BufReadPost", {
   end,
 })
 
--- Julia-specific settings
+-- Vue/TypeScript settings (Julia uses the global 4-space defaults)
 autocmd("FileType", {
-  pattern = "julia",
-  callback = function()
-    vim.opt_local.shiftwidth = 4
-    vim.opt_local.tabstop = 4
-    vim.opt_local.softtabstop = 4
-    vim.opt_local.expandtab = true
-  end,
-})
-
--- Vue/TypeScript settings
-autocmd("FileType", {
+  group = augroup("TwoSpaceIndent", { clear = true }),
   pattern = { "typescript", "typescriptreact", "vue" },
   callback = function()
     vim.opt_local.shiftwidth = 2
@@ -97,7 +87,7 @@ autocmd("BufWritePre", {
     if event.match:match("^%w%w+://") then
       return
     end
-    local file = vim.loop.fs_realpath(event.match) or event.match
+    local file = vim.uv.fs_realpath(event.match) or event.match
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
 })

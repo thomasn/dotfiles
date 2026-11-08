@@ -61,10 +61,9 @@ keymap("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location list" })
 keymap("n", "[l", "<cmd>lprev<cr>", { desc = "Previous location" })
 keymap("n", "]l", "<cmd>lnext<cr>", { desc = "Next location" })
 
--- Diagnostic keymaps
-keymap("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
-keymap("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
-keymap("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic error" })
+-- Diagnostic keymaps ([d / ]d and <C-w>d are Neovim built-ins;
+-- <leader>e is the Oil file explorer, see navigation.lua)
+keymap("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
 keymap("n", "<leader>xd", vim.diagnostic.setloclist, { desc = "Diagnostics to loclist" })
 
 -- Terminal mode escape

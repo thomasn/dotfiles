@@ -1,5 +1,6 @@
 -- ai.lua - AI assistant configuration
--- Copilot Free → DeepSeek fallback, Avante.nvim for advanced chat
+-- Copilot: inline completion. Avante: chat and refactors. llm.nvim: local
+-- Ollama completion for offline or sensitive code. See docs/WORKFLOW.md.
 
 return {
   -- GitHub Copilot (Free tier)
@@ -46,43 +47,14 @@ return {
     },
   },
 
-  -- Copilot Chat
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
-    dependencies = {
-      { "zbirenbaum/copilot.lua" },
-      { "nvim-lua/plenary.nvim" },
-    },
-    cmd = {
-      "CopilotChat",
-      "CopilotChatOpen",
-      "CopilotChatToggle",
-    },
-    keys = {
-      { "<leader>cc", "<cmd>CopilotChatToggle<cr>", desc = "Copilot Chat" },
-      { "<leader>ce", "<cmd>CopilotChatExplain<cr>", desc = "Copilot Explain" },
-      { "<leader>ct", "<cmd>CopilotChatTests<cr>", desc = "Copilot Tests" },
-      { "<leader>cf", "<cmd>CopilotChatFix<cr>", desc = "Copilot Fix" },
-      { "<leader>co", "<cmd>CopilotChatOptimize<cr>", desc = "Copilot Optimize" },
-    },
-    opts = {
-      debug = false,
-      model = "gpt-4",
-      temperature = 0.1,
-    },
-  },
-
   -- Avante.nvim - Claude/DeepSeek integration
   {
     "yetone/avante.nvim",
-    -- Opt-in: load on first use (keys/commands), NOT at startup. avante's
-    -- copilot provider fails setup unless GitHub Copilot is authenticated
-    -- (:Copilot auth); deferring load keeps that error out of normal sessions.
+    -- Opt-in: load on first use (keys/commands), NOT at startup, so Ollama
+    -- is only contacted when avante is actually invoked.
     build = "make",
     cmd = { "AvanteAsk", "AvanteToggle", "AvanteEdit", "AvanteRefresh", "AvanteChat" },
     dependencies = {
-      "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
       "nvim-tree/nvim-web-devicons",
@@ -109,7 +81,7 @@ return {
       { "<leader>aa", "<cmd>AvanteAsk<cr>", desc = "Avante Ask", mode = { "n", "v" } },
       { "<leader>ar", "<cmd>AvanteRefresh<cr>", desc = "Avante Refresh" },
       { "<leader>ae", "<cmd>AvanteEdit<cr>", desc = "Avante Edit", mode = "v" },
-      { "<leader>as", "<cmd>AvanteSwitch<cr>", desc = "Switch AI Provider" },
+      { "<leader>as", "<cmd>AvanteSwitchProvider<cr>", desc = "Switch AI Provider" },
     },
     opts = {
       provider = "ollama",
@@ -182,7 +154,7 @@ return {
     "huggingface/llm.nvim",
     event = "VeryLazy",
     keys = {
-      { "<leader>lm", "<cmd>LLMToggle<cr>", desc = "Toggle LLM" },
+      { "<leader>lm", "<cmd>LLMToggleAutoSuggest<cr>", desc = "Toggle LLM auto-suggest" },
       { "<leader>ls", "<cmd>LLMSuggestion<cr>", desc = "LLM Suggestion", mode = { "n", "v" } },
     },
     opts = {
@@ -195,11 +167,13 @@ return {
           top_p = 0.95,
         },
       },
+      -- llm-ls builds the prompt as prefix..before..suffix..after..middle,
+      -- so DeepSeek's <｜fim▁hole｜> is "suffix" and <｜fim▁end｜> is "middle".
       fim = {
         enabled = true,
         prefix = "<｜fim▁begin｜>",
-        middle = "<｜fim▁hole｜>",
-        suffix = "<｜fim▁end｜>",
+        suffix = "<｜fim▁hole｜>",
+        middle = "<｜fim▁end｜>",
       },
       debounce_ms = 150,
       accept_keymap = "<C-y>",

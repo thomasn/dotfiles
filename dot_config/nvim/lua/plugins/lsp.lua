@@ -9,7 +9,6 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
-      { "folke/neodev.nvim", opts = {} },
     },
     config = function()
       -- Neovim 0.11 native LSP API: vim.lsp.config() + vim.lsp.enable().
@@ -145,6 +144,13 @@ return {
         "julials", "ts_ls", "vue_ls", "lua_ls", "bashls", "pylsp", "jsonls",
       })
     end,
+  },
+
+  -- lazydev: Neovim/plugin API types for lua_ls when editing this config
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {},
   },
 
   -- Mason - LSP installer

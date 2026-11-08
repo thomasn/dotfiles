@@ -17,11 +17,7 @@ return {
     },
   },
 
-  {
-    "numToStr/Comment.nvim",
-    event = "VeryLazy",
-    opts = {},
-  },
+  -- Commenting (gc / gcc) is built into Neovim; no plugin needed.
 
   {
     "echasnovski/mini.pairs",

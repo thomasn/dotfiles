@@ -1,19 +1,17 @@
 # Neovim Plugins Configuration
 
-This directory contains all plugin configurations for faerieconfig.
+One lazy.nvim spec file per concern. Edit these in the chezmoi source
+(`~/faerieconfig/chezmoi/dot_config/nvim/`), not in `~/.config/nvim`.
 
-## Plugin Categories:
+1. **ai.lua** - AI assistants (Copilot inline, Avante chat, llm.nvim + Ollama)
+2. **lsp.lua** - LSP via Neovim's `vim.lsp.config()`, Mason, lazydev
+3. **completion.lua** - nvim-cmp autocompletion and LuaSnip
+4. **navigation.lua** - Telescope, Treesitter (`main` branch), textobject moves, Oil
+5. **julia.lua** - Julia language support and vim-slime REPL
+6. **vue-ts.lua** - Vue/TypeScript support (hybrid-mode work parked)
+7. **git.lua** - Gitsigns, Fugitive
+8. **ui.lua** - Colourscheme, which-key, Trouble, lualine, bufferline, Noice
+9. **editor.lua** - mini.surround, mini.pairs, mini.ai, autotag
 
-1. **ai.lua** - AI assistants (Copilot, Avante, llm.nvim)
-2. **lsp.lua** - Language Server Protocol configuration
-3. **completion.lua** - nvim-cmp autocompletion
-4. **navigation.lua** - Telescope, Oil, Treesitter
-5. **julia.lua** - Julia language support
-6. **vue-ts.lua** - Vue/TypeScript support
-7. **git.lua** - Git integration (Gitsigns, Fugitive)
-8. **ui.lua** - UI enhancements (Which-key, Noice, etc.)
-9. **editor.lua** - Editor utilities (surround, comments, etc.)
-
-Core config is created by 5-create-neovim.sh; plugin specs by
-6-neovim-plugins.sh (ai, lsp, completion) and 7-complete-setup.sh
-(navigation, julia, vue-ts, git, ui, editor).
+Plugin versions are pinned by `lazy-lock.json` (tracked in chezmoi).
+See `docs/KEYBINDINGS.md` for the key reference.
