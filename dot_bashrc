@@ -123,3 +123,7 @@ __fc_git_branch() {
     git branch --show-current 2>/dev/null | sed 's/.*/ (&)/'
 }
 PS1='\[\e[1;32m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[1;35m\]$(__fc_git_branch)\[\e[0m\]\$ '
+export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+[ -f ~/.bashrc.local ] && . ~/.bashrc.local
+
+
