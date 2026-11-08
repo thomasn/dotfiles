@@ -69,13 +69,6 @@ keymap("n", "<leader>xd", vim.diagnostic.setloclist, { desc = "Diagnostics to lo
 -- Terminal mode escape
 keymap("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
--- Increment/decrement
-keymap("n", "+", "<C-a>", { desc = "Increment number" })
-keymap("n", "-", "<C-x>", { desc = "Decrement number" })
-
--- Select all
-keymap("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
-
 -- New line without insert mode
 keymap("n", "<leader>o", "o<Esc>", { desc = "New line below" })
 keymap("n", "<leader>O", "O<Esc>", { desc = "New line above" })

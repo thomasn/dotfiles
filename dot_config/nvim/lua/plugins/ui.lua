@@ -58,6 +58,10 @@ return {
         component_separators = "|",
         section_separators = "",
       },
+      sections = {
+        -- lsp_status: spinner while a server starts or indexes, ✓ when ready
+        lualine_x = { "lsp_status", "encoding", "fileformat", "filetype" },
+      },
     },
   },
 
@@ -73,44 +77,6 @@ return {
         diagnostics = "nvim_lsp",
         always_show_bufferline = false,
       },
-    },
-  },
-
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
-    opts = {
-      -- Keep the : prompt on the bottom line, not a floating popup.
-      cmdline = {
-        view = "cmdline",
-      },
-      lsp = {
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
-        },
-      },
-      presets = {
-        bottom_search = true,
-        long_message_to_split = true,
-      },
-    },
-  },
-
-  {
-    "rcarriga/nvim-notify",
-    keys = {
-      { "<leader>un", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Dismiss all Notifications" },
-    },
-    opts = {
-      timeout = 3000,
-      max_height = function() return math.floor(vim.o.lines * 0.75) end,
-      max_width = function() return math.floor(vim.o.columns * 0.75) end,
     },
   },
 }

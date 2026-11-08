@@ -10,7 +10,7 @@ One lazy.nvim spec file per concern. Edit these in the chezmoi source
 5. **julia.lua** - Julia language support and vim-slime REPL
 6. **vue-ts.lua** - Vue/TypeScript support (hybrid-mode work parked)
 7. **git.lua** - Gitsigns, Fugitive
-8. **ui.lua** - Colourscheme, which-key, Trouble, lualine, bufferline, Noice
+8. **ui.lua** - Colourscheme, which-key, Trouble, lualine, bufferline
 9. **editor.lua** - mini.surround, mini.pairs, mini.ai, autotag
 
 Plugin versions are pinned by `lazy-lock.json` (tracked in chezmoi).

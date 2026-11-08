@@ -102,16 +102,22 @@ return {
     end,
   },
 
-  -- Oil.nvim file manager
+  -- Oil.nvim file manager, standing in for netrw (disabled in init.lua).
+  -- Loaded at startup so `:e .`, `:e dir/` and `nvim .` open it; lazy-loading
+  -- left those as blank buffers. `-` opens the current file's directory, and
+  -- `-` inside Oil goes up a level (vim-vinegar style).
   {
     "stevearc/oil.nvim",
+    lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
       { "<leader>e", "<cmd>Oil<cr>", desc = "Open File Explorer" },
+      { "-", "<cmd>Oil<cr>", desc = "Open parent directory" },
     },
     opts = {
       default_file_explorer = true,
-      columns = { "icon" },
+      -- netrw long-listing style
+      columns = { "icon", "permissions", "size", "mtime" },
       view_options = {
         show_hidden = true,
       },

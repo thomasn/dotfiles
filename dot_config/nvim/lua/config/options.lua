@@ -74,9 +74,12 @@ opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
 
--- Command line
+-- Command line (plain Vim messages on the bottom line; no noice)
 opt.cmdheight = 1
-opt.showmode = false
+opt.showmode = true
+
+-- Floating windows (LSP hover, signature help, diagnostics)
+opt.winborder = "rounded"
 
 -- Misc
 opt.confirm = true
