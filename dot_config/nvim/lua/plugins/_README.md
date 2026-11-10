@@ -12,6 +12,7 @@ One lazy.nvim spec file per concern. Edit these in the chezmoi source
 7. **git.lua** - Gitsigns, Fugitive
 8. **ui.lua** - Colourscheme, which-key, Trouble, lualine, bufferline
 9. **editor.lua** - mini.surround, mini.pairs, mini.ai, autotag
+10. **session.lua** - persistence.nvim per-directory sessions (tmux-resurrect restores nvim with them)
 
 Plugin versions are pinned by `lazy-lock.json` (tracked in chezmoi).
 See `docs/KEYBINDINGS.md` for the key reference.
