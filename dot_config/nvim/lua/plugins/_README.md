@@ -1,7 +1,8 @@
 # Neovim Plugins Configuration
 
 One lazy.nvim spec file per concern. Edit these in the chezmoi source
-(`~/faerieconfig/chezmoi/dot_config/nvim/`), not in `~/.config/nvim`.
+(`~/.local/share/chezmoi/dot_config/nvim/`, a clone of github.com/thomasn/dotfiles;
+`chezmoi edit ~/.config/nvim/...`), not in `~/.config/nvim`.
 
 1. **ai.lua** - AI assistants (Copilot inline, Avante chat, llm.nvim + Ollama)
 2. **lsp.lua** - LSP via Neovim's `vim.lsp.config()`, Mason, lazydev
