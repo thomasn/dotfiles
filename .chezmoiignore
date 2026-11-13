@@ -1,8 +1,25 @@
+# Never deployed.
+README.md
+
+{{- if eq .chezmoi.os "windows" }}
+# Windows: only the PowerShell profile and the key-remap scripts in ~\bin.
+# Linux shell, tmux, Neovim (which lives in AppData\Local\nvim on Windows) and
+# .gitconfig (autocrlf = input is wrong for Windows) are not applied here.
+.bashrc
+.config/nvim/
+.config/tmux/
+.config/wezterm/
+.gitconfig
+.local/
+.screenrc
+{{- else }}
+# Linux/Unix: no Windows files.
+Documents/
+bin/
 # GUI terminal config is only useful where there is a display.
 {{- if not (env "DISPLAY") }}
 {{- if not (env "WAYLAND_DISPLAY") }}
 .config/wezterm/
 {{- end }}
 {{- end }}
-
-README.md
+{{- end }}
