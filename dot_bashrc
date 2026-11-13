@@ -11,10 +11,10 @@ shopt -s histappend
 shopt -s checkwinsize
 
 # Enable color support
-alias ls='eza --icons'
-alias ll='eza -alh --icons'
-alias la='eza -a --icons'
-alias lt='eza --tree --level=2 --icons'
+alias ls='eza --icons=auto'
+alias ll='eza -alh --icons=auto'
+alias la='eza -a --icons=auto'
+alias lt='eza --tree --level=2 --icons=auto'
 alias grep='grep --color=auto'
 alias cat='bat --theme=TwoDark'
 alias diff='diff --color=auto'
